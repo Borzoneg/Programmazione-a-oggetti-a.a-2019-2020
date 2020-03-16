@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f7b67f14-6281-4085-96c1-f72aa78a0b56" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Comics Library/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Comics Library/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Comics Library/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Comics Library/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Comics Library/Design/Comics library.asta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Comics Library/src/Fumetto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Comics Library/src/Main.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\borzo\Documents\Programmazione\Java\Programmazione-a-oggetti-a.a-2019-2020\Personal\ASd\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Z8HPiElXCtMvX9GYFKbJDxV0aS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+      <module name="ASd" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f7b67f14-6281-4085-96c1-f72aa78a0b56" name="Default Changelist" comment="" />
+      <created>1584213778963</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584213778963</updated>
+      <workItem from="1584213781495" duration="27000" />
+      <workItem from="1584213818395" duration="50000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom" timestamp="1584213808130">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1584213808130" />
+    <state width="1493" height="223" key="GridCell.Tab.0.center" timestamp="1584213808130">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1584213808130" />
+    <state width="1493" height="223" key="GridCell.Tab.0.left" timestamp="1584213808130">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1584213808130" />
+    <state width="1493" height="223" key="GridCell.Tab.0.right" timestamp="1584213808130">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1584213808130" />
+    <state x="209" y="52" key="new project wizard" timestamp="1584213863878">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="209" y="52" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1584213863878" />
+  </component>
+</project>
