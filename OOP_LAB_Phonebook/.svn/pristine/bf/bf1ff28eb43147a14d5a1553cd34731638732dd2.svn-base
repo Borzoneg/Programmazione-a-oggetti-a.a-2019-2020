@@ -1,0 +1,82 @@
+package phonebook;
+
+/**
+ * Represents a phonebook that contains
+ * contact information entries.
+ * 
+ * Each entry includes first name, last name, 
+ * and phone number.
+ * 
+ * Entries can be accessed by position using {@link #get(int)}
+ * or searched by string match using {@link #find(String)}.
+ *
+ */
+public class PhoneBook {
+
+	// TODO: add here the attributes
+	
+  /**
+   * Create a new phonebook with given name
+   */
+  public PhoneBook(String name) {  
+	  //TODO: to be implemented 
+  }
+
+  /**
+   * Return the phonebook name
+   */
+  public String getName() {
+	  //TODO: to be implemented 
+    return null;
+  }
+
+  /**
+   * Insert a new contact at the end
+   * 
+   * @param first first name of the new contact
+   * @param last  last name of the new contact
+   * @param numner phone number of the contact
+   */  
+  public void add(String first, String last, String number){
+	  //TODO: to be implemented 
+  }
+
+  /**
+   * Return the first contact
+   */  
+  public String first() {
+	  //TODO: to be implemented
+	  return null;
+  }
+
+  /**
+   * Return the i-th contact (assume the first index is 1)
+   * 
+   * @param index index of the contact, starting at 1 
+   */
+  public String get(int index) {
+	  //TODO: to be implemented 
+	  return null;
+  }
+
+  /**
+   * Return a string containing the list of textual 
+   * representation of all contacts, separated by  {@code ", "}.
+   * 
+   * List starts with {@code "("} and ends with  {@code ")"} 
+   */
+  public String toString() {
+	  //TODO: to be implemented 
+	  return null;
+  }
+
+  /**
+   * Return the textual representation of first
+   * contact containing "needle"
+   */
+  public String find(String needle) {
+	  //TODO: to be implemented 
+	  return null;
+  }
+  
+}
