@@ -4,6 +4,6 @@ Esercizi a casa del corso **Programmazione a oggetti** del politecnico di Torino
 - **OOP_LAB_Phonebook** (Lab 0):<br>
       *Argomenti trattati*: introduzione ai laboratori svolta a lezione
     
-- **OOP_LAB_University** (LAb 1):<br>
+- **OOP_LAB_University** (Lab 1):<br>
       *Argomenti trattati*: sintassi base di Java
 
