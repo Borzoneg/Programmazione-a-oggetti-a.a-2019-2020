@@ -9,8 +9,6 @@ public class Course {
 	private String professor;
 	private String name;
 	private Student[] attendees = new Student[MAX_STUDENT];
-	private Exam[] exams = new Exam[MAX_STUDENT];
-	private float avg;
 	
 	/*
 	 * costruttore
@@ -20,7 +18,6 @@ public class Course {
 		this.professor = professor;
 		this.code = code;
 	}
-	
 	
 	/*
 	 * metodi
@@ -55,25 +52,4 @@ public class Course {
 	}
 	
 	
-	public boolean addExam(Exam exam) {
-		int i; 
-		for(i=0; i<exams.length; i++) {
-			if(exams[i] == null) {
-				exams[i] = exam;
-				avg = Exam.calculateAvg(exams);
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
-	public float getAvg() {
-		return avg;
-	}
-
-
-	public String getName() {
-		return name;
-	}
 }

@@ -1,7 +1,6 @@
 package university;
 
 public class Student {
-	
 	/*
 	 * Attributi
 	 */
@@ -10,9 +9,6 @@ public class Student {
 	private String surname;
 	private int matricola;
 	private Course[] courses = new Course[MAX_COURSES];
-	private Exam[] exams = new Exam[MAX_COURSES];
-	private float avg;
-	private float points;
 	
 	/*
 	 * Costruttore
@@ -52,39 +48,7 @@ public class Student {
 	}
 
 	
-
 	public int getMatricola() {
 		return matricola;
 	}
-	
-	
-	public boolean addExam(Exam exam) {
-		int i;
-		for(i=0; i<exams.length; i++) {
-			if(exams[i] == null) {
-				exams[i] = exam;
-				avg = Exam.calculateAvg(exams);
-				this.updatePoints();
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	void updatePoints() {
-		int i, nExam = 0, nCourse = 0;
-		for(i=0; i<exams.length && exams[i] != null; i++, nExam++);
-		for(i=0; i<courses.length && courses[i] != null; i++, nCourse++);
-		points = avg + (nExam / nCourse * 10);
-	}
-	
-	
-	float getAvg(){
-		return avg;
-	}
-
-	public float getPoints() {
-		return points;
-	}
-	
 }

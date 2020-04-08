@@ -8,14 +8,14 @@ package university;
  */
 public class University {
 
-	protected static final int START_POINT_MATRICOLE = 10000;
-	protected static final int START_POINT_COURSE_CODES = 10;
+	private static final int START_POINT_MATRICOLE = 10000;
+	private static final int START_POINT_COURSE_CODES = 10;
 	private static final int MAX_COURSES = 50;
 	private static final int MAX_STUDENTS = 1000;
 	private String name;
 	private String rectorName;
-	protected Course[] courses = new Course[MAX_COURSES];
-	protected Student[] students = new Student[MAX_STUDENTS];
+	private Course[] courses = new Course[MAX_COURSES];
+	private Student[] students = new Student[MAX_STUDENTS];
 	
 	/**
 	 * Constructor
