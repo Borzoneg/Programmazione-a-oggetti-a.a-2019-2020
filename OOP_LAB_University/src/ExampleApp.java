@@ -6,7 +6,7 @@ public class ExampleApp {
 		
 		String universityName = "Politecnico di Torino";
 		
-		University poli = new University(universityName);
+		UniversityExt poli = new UniversityExt(universityName);
 		
 		poli.setRector("Guido", "Saracco");
 		
@@ -21,7 +21,7 @@ public class ExampleApp {
 		int macro = poli.activate("Macro Economics", "Paul Krugman");
 		int oop = poli.activate("Object Oriented Programming", "James Gosling");
 		
-		System.out.println("Activated courses " + macro + " and " + oop); // 10 and 11
+		System.out.println("Activated courses " + macro + " and " + oop); // 10 and 11	
 		poli.register(s1, macro);
 		poli.register(s2, macro);
 		poli.register(s2, oop);

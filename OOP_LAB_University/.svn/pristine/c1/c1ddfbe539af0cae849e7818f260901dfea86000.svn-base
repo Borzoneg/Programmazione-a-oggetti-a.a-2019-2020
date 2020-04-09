@@ -8,22 +8,32 @@ package university;
  */
 public class University {
 
+	protected static final int START_POINT_MATRICOLE = 10000;
+	protected static final int START_POINT_COURSE_CODES = 10;
+	private static final int MAX_COURSES = 50;
+	private static final int MAX_STUDENTS = 1000;
+	private String name;
+	private String rectorName;
+	protected Course[] courses = new Course[MAX_COURSES];
+	protected Student[] students = new Student[MAX_STUDENTS];
+	
 	/**
 	 * Constructor
 	 * @param name name of the university
 	 */
 	public University(String name){
-		//TODO: to be implemented
+		this.name = name;
 	}
+	
 	
 	/**
 	 * Getter for the name of the university
 	 * @return name of university
 	 */
 	public String getName(){
-		//TODO: to be implemented
-		return null;
+		return name;
 	}
+	
 	
 	/**
 	 * Defines the rector for the university
@@ -32,8 +42,9 @@ public class University {
 	 * @param last
 	 */
 	public void setRector(String first, String last){
-		//TODO: to be implemented
+		rectorName = first + " " + last;
 	}
+	
 	
 	/**
 	 * Retrieves the rector of the university
@@ -41,9 +52,9 @@ public class University {
 	 * @return
 	 */
 	public String getRector(){
-		//TODO: to be implemented
-		return null;
+		return rectorName;
 	}
+	
 	
 	/**
 	 * Enroll a student in the university
@@ -53,9 +64,15 @@ public class University {
 	 * @return
 	 */
 	public int enroll(String first, String last){
-		//TODO: to be implemented
+		for(int i=0; i<students.length; ++i) {
+			if(students[i] == null) {
+				students[i] = new Student(first, last, i + START_POINT_MATRICOLE);
+				return students[i].getMatricola();
+			}
+		}
 		return -1;
 	}
+	
 	
 	/**
 	 * Retrieves the information for a given student
@@ -64,9 +81,9 @@ public class University {
 	 * @return information about the student
 	 */
 	public String student(int id){
-		//TODO: to be implemented
-		return null;
+		return students[id - START_POINT_MATRICOLE].toString();
 	}
+	
 	
 	/**
 	 * Activates a new course with the given teacher
@@ -76,9 +93,15 @@ public class University {
 	 * @return the unique code assigned to the course
 	 */
 	public int activate(String title, String teacher){
-		//TODO: to be implemented
+		for(int i=0; i<courses.length; i++) {
+			if(courses[i]==null) {
+				courses[i] = new Course(title, teacher, i + START_POINT_COURSE_CODES);
+				return courses[i].getCode();
+			}
+		}
 		return -1;
 	}
+
 	
 	/**
 	 * Retrieve the information for a given course
@@ -87,9 +110,9 @@ public class University {
 	 * @return information about the course
 	 */
 	public String course(int code){
-		//TODO: to be implemented
-		return null;
+		return courses[code - START_POINT_COURSE_CODES].toString();
 	}
+
 	
 	/**
 	 * Register a student to attend a course
@@ -97,8 +120,12 @@ public class University {
 	 * @param courseCode id of the course
 	 */
 	public void register(int studentID, int courseCode){
-		//TODO: to be implemented
+		if(!students[studentID - START_POINT_MATRICOLE].addCourse(courses[courseCode - START_POINT_COURSE_CODES]))
+			System.out.println("Raggiunto il limite massimo di corsi per lo studente");
+		if(!courses[courseCode - START_POINT_COURSE_CODES].addAttendee(students[studentID - START_POINT_MATRICOLE]))
+			System.out.println("Raggiunto il limite massimo di studenti iscritti al corso");	
 	}
+	
 	
 	/**
 	 * Retrieve a list of attendees
@@ -107,10 +134,10 @@ public class University {
 	 * @return list of attendees separated by "\n"
 	 */
 	public String listAttendees(int courseCode){
-		//TODO: to be implemented
-		return null;
+		return courses[courseCode - START_POINT_COURSE_CODES].attendeesListToString();
 	}
 
+	
 	/**
 	 * Retrieves the study plan for a student
 	 * 
@@ -118,7 +145,6 @@ public class University {
 	 * @return list of courses the student is registered for
 	 */
 	public String studyPlan(int studentID){
-		//TODO: to be implemented
-		return null;
+		return students[studentID - START_POINT_MATRICOLE].studyPlanToString();
 	}
 }

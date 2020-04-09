@@ -1,6 +1,6 @@
 package university;
 
-public class Student implements Comparable{
+public class Student {
 	
 	/*
 	 * Attributi
@@ -31,10 +31,6 @@ public class Student implements Comparable{
 		return name + " " + surname + " " + String.valueOf(matricola);
 	}
 	
-	
-	public String toStringWithPoints() {
-		return name + " " + surname + " " + String.valueOf(points);
-	}
 	
 	public String studyPlanToString() {
 		StringBuffer buf = new StringBuffer();
@@ -89,16 +85,6 @@ public class Student implements Comparable{
 
 	public float getPoints() {
 		return points;
-	}
-
-
-	@Override
-	public int compareTo(Object arg0) {
-		if(this.points > ((Student)arg0).points)
-			return -1;
-		if(this.points < ((Student)arg0).points)
-			return 1;
-		return 0;
 	}
 	
 }

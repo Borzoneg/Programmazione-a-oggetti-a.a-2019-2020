@@ -1,5 +1,7 @@
 package university;
 
+import java.util.logging.Logger;
+
 /**
  * This class represents a university education system.
  * 
@@ -57,24 +59,6 @@ public class University {
 	
 	
 	/**
-	 * Enroll a student in the university
-	 * 
-	 * @param first first name of the student
-	 * @param last last name of the student
-	 * @return
-	 */
-	public int enroll(String first, String last){
-		for(int i=0; i<students.length; ++i) {
-			if(students[i] == null) {
-				students[i] = new Student(first, last, i + START_POINT_MATRICOLE);
-				return students[i].getMatricola();
-			}
-		}
-		return -1;
-	}
-	
-	
-	/**
 	 * Retrieves the information for a given student
 	 * 
 	 * @param id the id of the student
@@ -84,25 +68,7 @@ public class University {
 		return students[id - START_POINT_MATRICOLE].toString();
 	}
 	
-	
-	/**
-	 * Activates a new course with the given teacher
-	 * 
-	 * @param title title of the course
-	 * @param teacher name of the teacher
-	 * @return the unique code assigned to the course
-	 */
-	public int activate(String title, String teacher){
-		for(int i=0; i<courses.length; i++) {
-			if(courses[i]==null) {
-				courses[i] = new Course(title, teacher, i + START_POINT_COURSE_CODES);
-				return courses[i].getCode();
-			}
-		}
-		return -1;
-	}
 
-	
 	/**
 	 * Retrieve the information for a given course
 	 * 
@@ -111,19 +77,6 @@ public class University {
 	 */
 	public String course(int code){
 		return courses[code - START_POINT_COURSE_CODES].toString();
-	}
-
-	
-	/**
-	 * Register a student to attend a course
-	 * @param studentID id of the student
-	 * @param courseCode id of the course
-	 */
-	public void register(int studentID, int courseCode){
-		if(!students[studentID - START_POINT_MATRICOLE].addCourse(courses[courseCode - START_POINT_COURSE_CODES]))
-			System.out.println("Raggiunto il limite massimo di corsi per lo studente");
-		if(!courses[courseCode - START_POINT_COURSE_CODES].addAttendee(students[studentID - START_POINT_MATRICOLE]))
-			System.out.println("Raggiunto il limite massimo di studenti iscritti al corso");	
 	}
 	
 	
