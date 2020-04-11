@@ -29,8 +29,7 @@ public class PhoneBook {
   /*
    * Return the phonebook name
    */
-  public String getName() {
-	  //TODO: to be implemented 
+  public String getName() { 
     return name;
   }
 
@@ -46,7 +45,7 @@ public class PhoneBook {
 	  for(int i=0; i<contatti.length; i++) {
 		  if(contatti[i] == null) {
 			  contatti[i] = c;
-			  break; // potrebbe anche essere un return visto che poi non si fa nulla, meglio però break, per aggiunte future
+			  break; // potrebbe anche essere un return visto che poi non si fa nulla, meglio perï¿½ break, per aggiunte future
 		  }
 	  }
   }
