@@ -1,0 +1,42 @@
+package hydraulic;
+
+/**
+ * Represents a tap that can interrupt the flow.
+ * 
+ * The status of the tap is defined by the method
+ * {@link #setOpen(boolean) setOpen()}.
+ */
+
+public class Tap extends Element {
+	
+	private boolean status; // 0 = closed tap; 1 = open tap
+
+	public Tap(String name) {
+		super(name);
+		type = "Tap";
+	}
+	
+	/**
+	 * Defines whether the tap is open or closed.
+	 * 
+	 * @param open  opening level
+	 */
+	public void setOpen(boolean open){
+		status = open;
+	}
+	
+	
+	/**
+	 * update specific method for tap, it set the output flow to 0 if the tap is closed
+	 */
+	@Override
+	public void update(SimulationObserver observer) {
+		outputFlow = status ? inputFlow : 0;
+		observer.notifyFlow(type, name, inputFlow, outputFlow);
+		if(outputElement != null) {
+			outputElement.setInputFlow(outputFlow);
+			outputElement.update(observer);
+		}	
+	}
+
+}
