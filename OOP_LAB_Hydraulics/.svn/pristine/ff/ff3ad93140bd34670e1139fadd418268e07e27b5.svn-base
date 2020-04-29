@@ -17,7 +17,7 @@ public class Sink extends ElementExt {
 	}
 	
 	/**
-	 * connect method for sink, this is done to prevent connect() to do anything when invoked on sink
+	 * connect method for sink, this is done to prevent connect do anything when invoked on sink
 	 */
 	@Override
 	public void connect(Element elem) {

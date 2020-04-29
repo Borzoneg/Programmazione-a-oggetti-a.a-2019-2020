@@ -19,7 +19,17 @@ public class Split extends ElementExt {
 		type = "Split";
 	}
 	
+	
+	
+	/**
+	 * @Return a string representation of the element	
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + "2nd output: " + outputElement2.getName() + "\n";
+	}
     
+	
 	/**
 	 * returns the downstream elements
 	 * @return array containing the two downstream element
@@ -59,37 +69,13 @@ public class Split extends ElementExt {
 	 */
 	@Override
 	public void update(SimulationObserver observer) {
-		outputFlow = inputFlow/2;
-		observer.notifyFlow(type, name, inputFlow, outputFlow, outputFlow);
+		outputFlow = inputFlow;
+		observer.notifyFlow(type, name, inputFlow, outputFlow/2, outputFlow/2);
 		if(outputElement != null && outputElement2 != null) {
-			outputElement.setInputFlow(outputFlow);
-			outputElement2.setInputFlow(outputFlow);
+			outputElement.setInputFlow(outputFlow / 2);
+			outputElement2.setInputFlow(outputFlow / 2);
 			outputElement.update(observer);
 			outputElement2.update(observer);
 		}	
-	}
-	
-	
-	/**
-	 * Create the layout of the single element and attach the layouts of its outputs to it
-	 */
-	@Override
-	public String cascadeLayout(int length) {
-	    String str = "";
-	    int i, partialLength;
-	    str += String.format("[%s]%s", name, type);
-	    length += str.length();
-	    if(outputElement != null && outputElement2 != null) {
-		str += " +-> ";
-		str += outputElement.cascadeLayout(length + str.length());
-		partialLength = str.length();
-		str += "\n";
-		for(i=0; i<length; i++) str += " ";
-		str += " +-> ";
-		str += outputElement.cascadeLayout(length + partialLength);		
-	    }
-	    else 
-		str += " *";
-	    return str;	
 	}
 }
