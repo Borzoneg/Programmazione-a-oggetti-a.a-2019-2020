@@ -8,4 +8,10 @@ Esercizi a casa del corso **Programmazione a oggetti** del politecnico di Torino
       *Argomenti trattati*: sintassi base di Java
 
 - **OOP_LAB_Hydraulics** (Lab 2):<br>
-      *Argomenti trattati*: ereditarietà, interfacce
+      *Argomenti trattati*: ereditarietà, interfacce e notificatori
+
+- **OOP_LAB_Diet** (Lab 3):<br>
+      *Argomenti trattati*: interfacce a fondo, enum e collezioni
+      
+- **OOP_LAB_MountainHut** (Lab 2):<br>
+      *Argomenti trattati*: stream, mappe
