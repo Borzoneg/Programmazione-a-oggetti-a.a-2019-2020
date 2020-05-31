@@ -19,5 +19,23 @@ public class Capo {
     public String toString() {
 	return String.format("%s %s di %s", modello.getNome(), colore.getNome(), materiale.getNome());
     }
+    
+    
+
+    public Modello getModello() {
+        return modello;
+    }
+
+    public Materiale getMateriale() {
+        return materiale;
+    }
+
+
+    public Colore getColore() {
+        return colore;
+    }
+
+
+   
 
 }
