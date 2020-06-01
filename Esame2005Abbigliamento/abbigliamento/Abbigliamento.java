@@ -34,7 +34,7 @@ public class Abbigliamento {
 		    break;
 		case "CAP":
 		    Capo capo = new Capo(modelli.get(fields[2]), materiali.get(fields[3]), colori.get(fields[4]));
-		    capi.put(capo.toString(), capo);
+		    capi.put(fields[1], capo);
 		    break;
 		case "COZ":
 		    Collezione collezione = new Collezione();
