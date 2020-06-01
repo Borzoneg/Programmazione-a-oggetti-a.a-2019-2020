@@ -1,32 +1,48 @@
 package libreria;
 
 public class Libro {
+private String titolo;
+private String autore;
+private int anno;
+private double prezzo;
+private int quantita;
+private int soglia;
+private Editore editore;
+
+    public Libro(String titolo, String autore, int anno, double prezzo, Editore editore) {
+	this.titolo = titolo;
+	this.autore = autore;
+	this.anno = anno;
+	this.prezzo = prezzo;
+	this.editore = editore;    
+}
 
     public String getTitolo(){
-        return null;
+        return titolo;
     }
     
     public String getAutore(){
-        return null;
+        return autore;
     }
     
     public int getAnno(){
-        return -1;
+        return anno;
     }
 
     public double getPrezzo(){
-        return -1.0;
+        return prezzo;
     }
     
     public Editore getEditore(){
-        return null;
+        return editore;
     }
 
-    public void setQuantita(int q){        
+    public void setQuantita(int q){     
+	this.quantita = q;
     }
     
     public int getQuantita(){
-        return -1;	
+        return quantita;	
     }
 
     public void registraVendita(int settimana, int mese){
