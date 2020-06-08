@@ -8,11 +8,37 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import it.polito.po.test.TestR3_ReadData;
+
 public class ExampleTest {
+    
+    private Region r;
 
+	@Before
+	public void setUp() {
+		r = Region.fromFile("Piemonte", "mountain_huts.csv");
+	}
+	
+    @Test
+	public void testCountMountainHutsPerAltitudeRange() {
+		assertNotNull("Missing region", r);
 
+		r.setAltitudeRanges("0-1000", "1001-1500", "1501-2000");
+		Map<String, Long> res = r.countMountainHutsPerAltitudeRange();
+		
+		assertNotNull("Missing count of mountain huts per altitude range", res);
+				
+		String[] resKeys = { "0-1000", "1001-1500", "1501-2000", "0-INF" };
+		Long[] resValues = { 22L, 36L, 52L, 57L };
+		System.out.println(res);
+		for (int i = 0; i < resKeys.length; i++) {
+			assertEquals("Wrong number of mountain huts in altitude range " + resKeys[i], resValues[i], res.get(resKeys[i]));
+		}
+	}
+    /**
     @Test
     public void testAll() {
 
@@ -59,5 +85,5 @@ public class ExampleTest {
 	assertEquals("Wrong number of municipalities per count 1", 61, res6.get(1L).size());
 
     }
-
+     */
 }

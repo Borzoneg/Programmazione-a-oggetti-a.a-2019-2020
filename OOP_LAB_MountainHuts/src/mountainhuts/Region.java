@@ -74,7 +74,7 @@ public class Region {
     public String getAltitudeRange(Integer altitude) {
 	int i;
 	for(i=0; i<minsAltitudes.size(); i++) {
-	    if(altitude > minsAltitudes.get(i) && altitude < maxsAltitudes.get(i))
+	    if(altitude >= minsAltitudes.get(i) && altitude <= maxsAltitudes.get(i))
 		return String.format("%d-%d", minsAltitudes.get(i), maxsAltitudes.get(i));	
 	}
 	return "0-INF";
@@ -264,22 +264,22 @@ public class Region {
      */
     public Map<String, Map<String, Long>> countMountainHutsPerMunicipalityPerProvince() {
 	Map<String, Map<String, Long>> mhPerMunPerProv = new HashMap<>();
-	municipalities.
+	mountainHuts.
 	stream().
-	forEach(mun -> 	
+	forEach(mh -> 	
 	{
-	    if(!mhPerMunPerProv.containsKey(mun.getProvince())) {
+	    if(!mhPerMunPerProv.containsKey(mh.getMunicipality().getProvince())) {
 		Map<String, Long> tmpMap = new HashMap<>();
-		tmpMap.put(mun.getName(), (long) 1);
-		mhPerMunPerProv.put(mun.getProvince(), tmpMap);
-
+		tmpMap.put(mh.getMunicipality().getName(), (long) 1);
+		mhPerMunPerProv.put(mh.getMunicipality().getProvince(), tmpMap);
 	    }
 	    else {
-		Map<String, Long> tmpMap = mhPerMunPerProv.get(mun.getProvince());
-		if(!tmpMap.containsKey(mun.getName()))
-		    tmpMap.put(mun.getName(), (long) 1);
-		else
-		    tmpMap.put(mun.getName(), tmpMap.get(mun.getName()) + 1);
+		Map<String, Long> tmpMap = mhPerMunPerProv.get(mh.getMunicipality().getProvince());
+		if(!tmpMap.containsKey(mh.getMunicipality().getName().toUpperCase()))
+		    tmpMap.put(mh.getMunicipality().getName(), (long) 1);
+		else 
+		    tmpMap.put(mh.getMunicipality().getName(), tmpMap.get(mh.getMunicipality().getName()) + 1);
+		  
 	    }	
 	});
 	return mhPerMunPerProv;
@@ -291,22 +291,28 @@ public class Region {
      * 
      * @return a map with the altitude range as key and the number of mountain huts
      *         as value
-     */
-    //	    poi si scandisce le altitudes, se l'altitudine del rifugio è dentro il range si aggiunge uno al map.get(range) 	
+     */ 	
     public Map<String, Long> countMountainHutsPerAltitudeRange() {
 	Map<String, Long> mhPerAltitude = new HashMap<>();
 
 	for(String s : altitudes)
 	    mhPerAltitude.put(s, (long) 0);
+	mhPerAltitude.put("0-INF", (long) 0);
 
 	mountainHuts.
 	stream().
 	forEach(mh -> {
+	    boolean inserito = false;
 	    for(String range : altitudes) {
-		int i =  mh.getAltitude() != null ? mh.getAltitude().get() : mh.getMunicipality().getAltitude();
-		if(altitudeIntoRange(range, i))
+		int i =  mh.getAltitude().isPresent() ? mh.getAltitude().get() : mh.getMunicipality().getAltitude();
+		if(altitudeIntoRange(range, i)) {
 		    mhPerAltitude.put(range, mhPerAltitude.get(range) + 1);
+		    inserito = true;
+		}
+		
 	    }
+	    if(!inserito)
+		mhPerAltitude.put("0-INF", mhPerAltitude.get("0-INF") + 1);
 	});
 	return mhPerAltitude;
     }
@@ -340,14 +346,17 @@ public class Region {
 
 	for(String s : altitudes)
 	    bedsPerAltitude.put(s, Optional.of(0));
-
+	bedsPerAltitude.put("0-INF", Optional.of(0));
+	
 	mountainHuts.
 	stream().
 	forEach(mh -> {
 	    for(String range : altitudes) {
-		int i =  mh.getAltitude() != null ? mh.getAltitude().get() : mh.getMunicipality().getAltitude();
+		bedsPerAltitude.put("0-INF", Optional.of(Integer.max(bedsPerAltitude.get("0-INF").get(), mh.getBedsNumber())));
+		int i =  mh.getAltitude().isPresent() ? mh.getAltitude().get() : mh.getMunicipality().getAltitude();
 		if(altitudeIntoRange(range, i))
 		    bedsPerAltitude.put(range, Optional.of(Integer.max(bedsPerAltitude.get(range).get(), mh.getBedsNumber())));
+		    
 	    }
 	});
 	return bedsPerAltitude;

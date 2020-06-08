@@ -14,7 +14,7 @@ public class MountainHut {
     private String category;
     private int bedsNumber;
     private Municipality municipality;
-    private Optional<Integer> altitude = null;
+    private Optional<Integer> altitude = Optional.empty();
     
     public MountainHut(String name, String category, Integer bedsNumber, Municipality municipality) {
 	this.name = name;
