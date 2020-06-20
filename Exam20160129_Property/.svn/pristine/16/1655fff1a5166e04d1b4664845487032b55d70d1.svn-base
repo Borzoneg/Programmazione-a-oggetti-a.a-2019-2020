@@ -1,0 +1,33 @@
+package managingProperties;
+
+public class Building {
+    
+    String name;
+    int nApartements;
+    Owner owners[]; // owner at i-th position is the owner of the i-th apartement of the building
+    
+    public Building(String building, int n) {
+	name = building;
+	nApartements = n;
+	owners = new Owner[n];
+    }
+
+    public Integer getNApartement() {
+	return nApartements;
+    }
+
+
+    public Owner ownerOf(Integer n) {
+	return owners[n];
+    }
+    
+    
+    public void setOwner(Owner owner, int nApartement) {
+	owners[nApartement] = owner;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+}

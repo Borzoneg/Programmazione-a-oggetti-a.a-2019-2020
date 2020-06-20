@@ -1,0 +1,9 @@
+package managingProperties;
+
+public class Apartement {
+
+    public Apartement() {
+	
+    }
+
+}

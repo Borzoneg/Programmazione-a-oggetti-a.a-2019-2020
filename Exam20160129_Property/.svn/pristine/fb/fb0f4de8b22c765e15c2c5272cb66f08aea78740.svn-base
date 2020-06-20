@@ -1,0 +1,174 @@
+package managingProperties;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+public class PropertyManager {
+
+    private Map<String, Building> buildings = new HashMap<>();
+    private Map<String, Owner> owners = new HashMap<>();
+    private Map<String, List<Professional>> professionals = new TreeMap<>();
+    private List <String> professionalsList  = new ArrayList<>();
+    private int nRequest = 0;
+    private List <Request> requests = new ArrayList<>();
+
+    /**
+     * Add a new building 
+     */
+    public void addBuilding(String building, int n) throws PropertyException {
+	if(n > 100 || n < 1)
+	    throw new PropertyException(n + " non valido");
+	if(buildings.containsKey(building))
+	    throw new PropertyException(building + " già inserito");
+
+	Building b = new Building(building, n);
+	buildings.put(building, b);
+    }
+
+    public void addOwner(String owner, String... apartments) throws PropertyException {
+	if(owners.containsKey(owner))
+	    throw new PropertyException(owner + " già inserito");
+	Owner o = new Owner(owner);
+	for(String s : apartments) {
+	    String fields[] = s.split(":");
+	    if(! buildings.containsKey(fields[0]))
+		throw new PropertyException(fields[0] + " non definito");
+	    if(Integer.valueOf(fields[1]) > buildings.get(fields[0]).getNApartement() || Integer.valueOf(fields[1]) < 1)
+		throw new PropertyException(fields[1] + " non valido");
+	    if(buildings.get(fields[0]).ownerOf(Integer.valueOf(fields[1])) != null)
+		throw new PropertyException(fields[1] + " già occupato");
+
+	    buildings.get(fields[0]).setOwner(o, Integer.valueOf(fields[1]));
+	    o.addApartement(s);
+	}
+	owners.put(owner, o);
+    }	
+
+    /**
+     * Returns a map ( number of apartments => list of buildings ) 
+     * 
+     */
+    public SortedMap<Integer, List<String>> getBuildings() {
+	SortedMap<Integer, List<String>> result = new TreeMap<>();
+	buildings.
+	values().
+	stream().
+	forEach(b -> {
+	    if(! result.containsKey(b.getNApartement())) {
+		List<String> tmpMap = new ArrayList<>();
+		tmpMap.add(b.getName());
+		result.put(b.getNApartement(), tmpMap);
+	    }
+	    else {
+		List<String> tmpMap = result.get(b.getNApartement());
+		tmpMap.add(b.getName());
+		tmpMap.sort((s1, s2) -> s1.compareTo(s2));
+		result.put(b.getNApartement(), tmpMap);			
+	    }
+	});
+	return result;
+    }
+
+    public void addProfessionals(String profession, String... professionals) throws PropertyException {
+	if(this.professionals.containsKey(profession))
+	    throw new PropertyException(profession + " già inserita");
+	List<Professional> tmp = new ArrayList<>();
+	for(String s : professionals) {
+	    if(professionalsList.contains(s))
+		throw new PropertyException(s + " già inserito");
+	    Professional professional = new Professional(s, profession);
+	    professionalsList.add(s);
+	    tmp.add(professional);
+	}
+	this.professionals.put(profession, tmp);
+    }
+
+    /**
+     * Returns a map ( profession => number of workers )
+     *
+     */
+    public SortedMap<String, Integer> getProfessions() {
+	SortedMap<String, Integer> result = new TreeMap<>();
+	professionals.keySet().stream().forEach(p -> result.put(p, professionals.get(p).size()));
+	return result;
+    }
+
+    public int addRequest(String owner, String apartment, String profession) throws PropertyException {
+	if(! owners.containsKey(owner))
+	    throw new PropertyException(owner + " non registrato");
+	Owner o = owners.get(owner);
+	Building b = buildings.get(apartment.split(":")[0]);
+	if(b == null || b.getNApartement() < Integer.valueOf(apartment.split(":")[1]) || Integer.valueOf(apartment.split(":")[1]) < 0)
+	    throw new PropertyException("appartamento non valido");
+	if(! o.possess(apartment))
+	    throw new PropertyException(owner + " non possiede " + apartment);
+
+	Request request = new Request(o, apartment, profession, nRequest);
+	requests.add(request);
+	nRequest++;
+	return nRequest - 1;
+    }
+
+    public void assign(int requestN, String professional) throws PropertyException {
+	if(requestN >= nRequest)
+	    throw new PropertyException(requestN + " non esiste");
+	Request r = requests.get(requestN);
+	if(! r.getState().equals("pending"))
+	    throw new PropertyException(requestN + " già presa in consegna");
+	for(Professional p : professionals.get(r.getProfession())) {
+	    if(p.getName().equals(professional)) {
+		r.setProfessional(p);
+		return;
+	    }
+	}
+	throw new PropertyException(professional + " non svolge la professione adatta");
+    }
+
+    public List<Integer> getAssignedRequests() {
+	List<Integer> result = new ArrayList<>();
+	requests.stream().forEach(r ->{
+	    if(r.getState().equals("assigned")) 
+		result.add(r.getId());
+	});
+	return result;
+    }
+
+
+    public void charge(int requestN, int amount) throws PropertyException {
+
+
+    }
+
+    /**
+     * Returns the list of request ids
+     * 
+     */
+    public List<Integer> getCompletedRequests() {
+
+	return null;
+    }
+
+    /**
+     * Returns a map ( owner => total expenses )
+     * 
+     */
+    public SortedMap<String, Integer> getCharges() {
+
+	return null;
+    }
+
+    /**
+     * Returns the map ( building => ( profession => total expenses) ).
+     * Both buildings and professions are sorted alphabetically
+     * 
+     */
+    public SortedMap<String, Map<String, Integer>> getChargesOfBuildings() {
+
+	return null;
+    }
+
+}

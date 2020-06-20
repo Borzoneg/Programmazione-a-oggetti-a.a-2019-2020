@@ -1,0 +1,24 @@
+package it.polito.oop.milliways;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Race {
+    
+    private String name;
+    private List<String> requirements = new ArrayList<>();
+    
+    public void addRequirement(String requirement) throws MilliwaysException {
+	if(requirements.contains(requirement))
+	    throw new MilliwaysException();
+	requirements.add(requirement);
+    }
+
+    public List<String> getRequirements() {
+	return requirements;
+    }
+
+    public String getName() {
+	return name;
+    }
+}

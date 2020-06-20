@@ -1,0 +1,17 @@
+package managingProperties;
+
+public class Professional {
+    
+	private String name;
+	private String profession;
+
+    public Professional(String name, String profession) {
+	this.name = name;
+	this.profession = profession;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+}

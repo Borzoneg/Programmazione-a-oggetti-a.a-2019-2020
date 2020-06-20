@@ -1,0 +1,104 @@
+package it.polito.oop.milliways;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+
+public class Restaurant {
+
+    private Map<String, Race> races = new HashMap<>();
+    private Map<Integer, Hall> halls = new LinkedHashMap<>();
+
+    public Restaurant() {
+    }
+
+    public Race defineRace(String name) throws MilliwaysException{
+	if(races.containsKey(name))
+	    throw new MilliwaysException();
+	Race r = new Race(name);
+	races.put(name, r);
+	return r;
+    }
+
+    public Party createParty() {
+	Party p = new Party();
+	return p;
+    }
+
+    public Hall defineHall(int id) throws MilliwaysException{
+	if(halls.containsKey(id))
+	    throw new MilliwaysException();
+	Hall h = new Hall(id);
+	halls.put(id, h);
+	return h;
+    }
+
+    public List<Hall> getHallList() {
+	return halls.values().stream().collect(Collectors.toList());
+    }
+
+    public Hall seat(Party party, Hall hall) throws MilliwaysException {
+	if(! hall.isSuitable(party))
+	    throw new MilliwaysException();
+	hall.seat(party);
+	return hall;
+    }
+
+    public Hall seat(Party party) throws MilliwaysException {
+	for(Hall h : halls.values()) {
+	    if(h.isSuitable(party)) {
+		h.seat(party);
+		return h;
+	    }
+	}
+	throw new MilliwaysException();
+    }
+
+    public Map<Race, Integer> statComposition() {
+	Map<Race, Integer> result = new TreeMap<>((r1, r2) -> r1.getName().compareTo(r2.getName()));
+	races.values().stream().forEach(r -> {if(r.getN() > 0)result.put(r, r.getN());});
+	return result;
+    }
+
+    public List<String> statFacility() {
+	Map<String, Integer> tmp = new HashMap<>();
+	Map<Integer, List<String>> tmp1 = new HashMap<>();
+	List<String> result;
+	halls.values().stream().forEach(h -> h.getFacilities().stream().forEach(f -> tmp.put(f, tmp.containsKey(f) ? tmp.get(f) + 1 : 1)));
+	System.out.println("tmp " + tmp.toString());
+	result = tmp.keySet().stream().collect(Collectors.toList());
+	result.sort((f1, f2) -> tmp.get(f1) == (tmp.get(f2)) ? f1.compareTo(f2) : tmp.get(f2) - tmp.get(f1));
+	return result;
+
+    }
+
+    public Map<Integer,List<Integer>> statHalls() {
+	SortedMap<Integer, List<Integer>> result = new TreeMap<>();
+	Map<Integer, Integer> tmp = new HashMap<>();
+	halls.values().stream().forEach(h -> tmp.put(h.getId(), h.getNumFacilities()));
+	tmp.keySet().stream().forEach(code -> {
+	    if(! result.containsKey(tmp.get(code))) {
+		List<Integer> tmp2 = new ArrayList<>();
+		tmp2.add(code);
+		tmp2.sort((i1, i2) -> i1.compareTo(i2));
+		result.put(tmp.get(code), tmp2);
+	    }
+	    else {
+		List<Integer> tmp2 = result.get(tmp.get(code));
+		tmp2.add(code);
+		tmp2.sort((i1, i2) -> i1.compareTo(i2));
+		result.put(tmp.get(code), tmp2);		
+	    }
+	    
+		
+	});
+	return result;
+    }
+
+}

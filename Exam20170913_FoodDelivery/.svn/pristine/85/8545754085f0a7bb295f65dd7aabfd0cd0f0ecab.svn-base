@@ -1,0 +1,39 @@
+package delivery;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Order {
+   
+    private Map<Food, Integer> foods = new HashMap<>();
+    private Customer customer;
+    private int quantity;
+    
+    public Order(Customer customer) {
+	this.customer = customer;
+    }
+
+    public void addFood(Food food, int qty) {
+	foods.put(food, foods.containsKey(food) ? foods.get(food) + qty : qty);
+    }
+
+    public int getQuantity() {
+	return quantity;
+    }
+
+    public List<Food> getFoods() {
+	return foods.keySet().stream().collect(Collectors.toList());
+    }
+    
+    public List<String> foodsListString() {
+	List<String> result = new ArrayList<>();
+	for(Food f : foods.keySet()) {
+	    result.add(String.format("%s, %d", f.getDescription(), foods.get(f)));
+	}
+	return result;
+    }
+    
+}

@@ -1,0 +1,12 @@
+package managingProperties;
+
+public class Building {
+    String code;
+    int nApartements;
+    
+    public Building(String building, int n) {
+	code = building;
+	nApartements = n;
+    }
+
+}

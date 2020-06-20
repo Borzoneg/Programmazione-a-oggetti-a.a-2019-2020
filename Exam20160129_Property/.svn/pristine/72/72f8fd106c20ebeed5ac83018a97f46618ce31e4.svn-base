@@ -1,0 +1,24 @@
+package managingProperties;
+
+import java.util.ArrayList;
+
+public class Owner {
+
+    private String name;
+    private ArrayList<String> apartements = new ArrayList<>();
+
+    public Owner(String name) {
+	this.name = name;
+    }
+
+    public void addApartement(String s) {
+	apartements.add(s);
+    }
+
+    public boolean possess(String apartment) {
+	if(apartements.contains(apartment))
+	    return true;
+	return false;
+    }
+
+}
