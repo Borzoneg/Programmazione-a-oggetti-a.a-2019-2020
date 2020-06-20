@@ -1,0 +1,26 @@
+package transactions;
+
+import java.util.Set;
+import java.util.TreeSet;
+
+public class Carrier {
+
+    private String name;
+    private Set<Region> regions = new TreeSet<>((r1, r2) -> r1.getName().compareTo(r2.getName()));
+    
+    public Carrier(String name) {
+	this.name = name;
+    }
+
+    public String getName() {
+	return name;
+    }
+    
+    public void addRegion(Region region) {
+	regions.add(region);
+    }
+    
+    public Set<Region> getRegions(){
+	return regions;
+    }
+}

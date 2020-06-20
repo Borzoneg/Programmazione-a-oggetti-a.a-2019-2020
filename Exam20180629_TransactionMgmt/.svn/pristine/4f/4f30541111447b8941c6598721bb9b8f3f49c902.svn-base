@@ -1,0 +1,14 @@
+package transactions;
+
+public class Offer {
+    
+    String id;
+    String placeName;
+    String productId;
+    
+    public Offer(String id, String placeName, String productId) {
+	this.id = id;
+	this.placeName = placeName;
+	this.productId = productId;
+    }
+}

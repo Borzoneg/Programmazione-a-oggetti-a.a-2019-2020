@@ -1,0 +1,36 @@
+package transactions;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class Region {
+
+    private String name;
+    private Set<String> places = new TreeSet<>();
+    private Set<Carrier> carriers = new TreeSet<>((c1, c2) -> c1.getName().compareTo(c2.getName()));
+
+    public Region(String name) {
+	this.name = name;
+    }
+
+    public void addPlace(String place) {
+	places.add(place);
+    }
+    
+    public void addCarrier(Carrier carrier) {
+	carriers.add(carrier);
+    }
+    
+    public Set<Carrier> getCarriers(){
+	return carriers;
+    }
+    
+    public Set<String> getPlaces(){
+	return places;
+    }
+    
+    public String getName() {
+	return name;
+    }
+}

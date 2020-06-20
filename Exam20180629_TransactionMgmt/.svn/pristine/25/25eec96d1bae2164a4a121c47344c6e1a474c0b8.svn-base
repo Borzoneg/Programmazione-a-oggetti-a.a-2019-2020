@@ -1,0 +1,14 @@
+package transactions;
+
+public class Order {
+    
+    String id;
+    String placeName;
+    String productId;
+    
+    public Order(String id, String placeName, String productId) {
+	this.id = id;
+	this.placeName = placeName;
+	this.productId = productId;
+    }
+}

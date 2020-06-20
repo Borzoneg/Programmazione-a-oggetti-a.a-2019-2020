@@ -1,0 +1,89 @@
+package transactions;
+import java.util.*;
+import java.util.stream.Collectors;
+
+//import static java.util.stream.Collectors.*;
+//import static java.util.Comparator.*;
+
+public class TransactionManager {
+
+    private Map<String, Region> regions = new HashMap<>();
+    private Map<String, Carrier> carriers = new HashMap<>();
+    private Map<String, Region> places = new HashMap<>();
+    private Map<String, Order> orders = new HashMap<>();
+    private Map<String, Offer> offers = new HashMap<>();
+
+    //R1
+    public List<String> addRegion(String regionName, String... placeNames) { 
+	Region r = new Region(regionName);
+	for(String s : placeNames) {
+	    if(! places.containsKey(s)) {
+		places.put(s, r);
+		r.addPlace(s);
+	    }
+	}
+	regions.put(regionName, r);
+	return r.getPlaces().stream().collect(Collectors.toList());
+    }
+
+    public List<String> addCarrier(String carrierName, String... regionNames) { 
+	Carrier c = new Carrier(carrierName);
+	for(String s : regionNames) {
+	    if(regions.containsKey(s)) {
+		regions.get(s).addCarrier(c);
+		c.addRegion(regions.get(s));
+	    }
+	}
+	carriers.put(carrierName, c);
+	return c.getRegions().stream().map(r -> r.getName()).collect(Collectors.toList());
+    }
+
+    public List<String> getCarriersForRegion(String regionName) { 
+	return regions.get(regionName).getCarriers().stream().map(c -> c.getName()).collect(Collectors.toList());
+    }
+
+    //R2
+    public void addRequest(String requestId, String placeName, String productId) throws TMException {
+	if(orders.containsKey(requestId))
+	    throw new TMException();
+	if(! places.containsKey(placeName))
+	    throw new TMException();
+	Order o = new Order(requestId, placeName, productId);
+	orders.put(requestId, o);
+    }
+
+    public void addOffer(String offerId, String placeName, String productId) throws TMException {
+	if(offers.containsKey(offerId))
+	    throw new TMException();
+	if(! places.containsKey(placeName))
+	    throw new TMException();
+	Offer o = new Offer(offerId, placeName, productId);
+	offers.put(offerId, o);
+    }
+
+
+    //R3
+    public void addTransaction(String transactionId, String carrierName, String requestId, String offerId) 
+	    throws TMException {
+    }
+
+    public boolean evaluateTransaction(String transactionId, int score) {
+	return false;
+    }
+
+    //R4
+    public SortedMap<Long, List<String>> deliveryRegionsPerNT() {
+	return new TreeMap<Long, List<String>>();
+    }
+
+    public SortedMap<String, Integer> scorePerCarrier(int minimumScore) {
+	return new TreeMap<String, Integer>();
+    }
+
+    public SortedMap<String, Long> nTPerProduct() {
+	return new TreeMap<String, Long>();
+    }
+
+
+}
+
