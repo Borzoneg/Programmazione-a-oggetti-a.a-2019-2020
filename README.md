@@ -13,5 +13,12 @@ Esercizi a casa del corso **Programmazione a oggetti** del politecnico di Torino
 - **OOP_LAB_Diet** (Lab 3):<br>
       *Argomenti trattati*: interfacce a fondo, enum e collezioni
       
-- **OOP_LAB_MountainHut** (Lab 2):<br>
+- **OOP_LAB_MountainHut** (Lab 4):<br>
       *Argomenti trattati*: stream, mappe
+
+- **OOP_LAB_Clinic** (Lab 5):<br>
+      *Argomenti trattati*: exception, riepilogo di tutti gli argomenti
+
+## Indicazioni:
+
+Dentro a ogni progetto è presente un file "requisiti.html" che decrive i requisiti di quel progetto
