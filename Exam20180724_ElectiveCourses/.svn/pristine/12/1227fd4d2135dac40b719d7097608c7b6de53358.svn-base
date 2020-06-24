@@ -1,0 +1,22 @@
+package it.polito.oop.elective;
+
+public class Student {
+    
+    private String id;
+    private double media;
+    
+    public Student(String id, double media) {
+	super();
+	this.id = id;
+	this.media = media;
+    }
+    
+    public void setMedia(double media) {
+	this.media = media;
+    }
+
+    public double getAvg() {
+	return media;
+    }
+    
+}

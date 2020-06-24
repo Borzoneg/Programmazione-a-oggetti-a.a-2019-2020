@@ -1,0 +1,18 @@
+package it.polito.oop.elective;
+
+public class Course {
+
+    private String name;
+    private int posti;
+    
+    public Course(String name, int posti) {
+	super();
+	this.name = name;
+	this.posti = posti;
+    }
+    
+    public String getName() {
+	return name;
+    }
+    
+}

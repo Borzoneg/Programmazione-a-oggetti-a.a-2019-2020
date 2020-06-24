@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Evaluations</title>
+	<link href=".css.css" rel="stylesheet" type="text/css">
+	<style>
+		@media print {  /* adjusted to print the html to a single-page pdf */
+		body {
+			font-size: 10pt;
+		}
+	</style>
+</head>
+<body>
+
+<h1>Evaluations</h1>
+Il programma simula la valutazione dei gruppi di ricerca di un ente. 
+La valutazione riguarda i punti ottenuti dalla pubblicazione di articoli su riviste. 
+Le riviste sono suddivise in livelli e i livelli hanno punteggi diversi. 
+<p>
+Tutte le classi si trovano nel package <b>evaluation</b>. La classe principale è <b>Evaluations</b>. La classe <b>TestApp</b> nel package <b>example</b> contiene un esempio.
+ Le eccezioni sono lanciate mediante la classe <b>EvaluationsException</b>. 
+<p>
+&Egrave; possibile accedere alla <a href="https://oop.polito.it/api" target="_blank">documentazione delle API Java</a>.
+</p>
+ 
+<h2>R1 Livelli e riviste</h2>
+<p>
+Il metodo <b>addPointsForLevels (int... points)</b> definisce i punti dei livelli. Il numero di livelli è assunto essere pari al numero di punti, i livelli iniziano da 1 e sono progressivi. Il numero di punti è almeno 2. I punti sono decrescenti (al livello 1 sono associati più punti che al livello 2 e così via); il metodo lancia un'eccezione se i punti non sono decrescenti.
+<p>
+Il metodo <b>getPointsOfLevel(int level)</b> dà i punti del livello indicato.
+<p>
+Il metodo <b>addJournal(String name, String discipline, int level)</b> aggiunge una rivista di cui sono dati il nome, la disciplina di pertinenza e il livello; inoltre definisce la disciplina.  Lancia un'eccezione se il livello è indefinito.
+<p>
+Il metodo <b>countJournals()</b> restituisce il numero di riviste definite.
+<p>
+Il metodo <b>getJournalNamesOfAGivenDiscipline(String discipline)</b> produce la lista ordinata alfabeticamente dei nomi delle riviste interessate alla disciplina indicata. Dà una lista vuota se non è definita nessuna rivista per la disciplina.
+
+
+
+<h2>R2 Gruppi e membri</h2>
+<p>
+Il metodo <b>addGroup(String name, String... disciplines)</b> aggiunge un gruppo (di ricerca) di cui sono dati il nome e le discipline di interesse. Lancia un'eccezione se esiste già un gruppo con quel nome.
+<p>
+Il metodo <b>setMembers(String groupName, String... memberNames)</b> definisce i membri di un gruppo. Lancia un'eccezione se il gruppo è indefinito.
+<p>
+Il metodo <b>getMembers()</b> restituisce la lista dei membri del gruppo dato, ordinati alfabeticamente.
+Se il gruppo non è definito o non ha membri viene restituita una lista vuota.
+<p>
+Il metodo <b>getGroupNamesOfAGivenDiscipline(String discipline)</b> produce la lista ordinata dei nomi dei gruppi interessati alla disciplina indicata. Dà una lista vuota se la disciplina non è definita o se non ci sono gruppi per quella disciplina.
+
+
+<h2>R3 Articoli</h2>
+<p>
+Il metodo <b>addPaper(String title, String journalName, String... memberNames)</b> aggiunge un articolo di cui sono dati il titolo, la rivista e gli autori (almeno uno).
+Lancia un'eccezione se la rivista non è definita o se non c'è almeno un autore.
+<p>
+Il metodo <b>getTitlesOfAGivenAuthor (String authorName)</b> produce la lista ordinata dei titoli degli articoli dell'autore (membro di gruppo) indicato. Dà una lista vuota se non ci sono articoli per quell'autore.
+<p>
+
+
+<h2>R4 Valutazioni</h2>
+<p>
+Il metodo <b>getPointsOfAGivenAuthor(String memberName)</b> dà il punteggio del membro di gruppo di ricerca indicato. Per ogni articolo di cui è autore, il membro indicato riceve  un numero di punti pari a quelli della rivista associata all'articolo, divisi per il numero totale di autori. Il risultato del metodo è dato dalla somma dei punti suddetti arrotondata all'intero più vicino tramite il metodo <i>Math.round()</i>.
+
+<p>
+Il metodo <b>evaluate()</b> calcola il totale dei punti per tutti gli articoli (sono quelli delle riviste di appartenenza).
+Si nota che il totale dei punti degli articoli non è necessariamente uguale alla somma dei punti di tutti gli autori, a causa degli arrotondamenti.
+
+<h2>R5 Statistiche</h2>
+<p>
+Il metodo <b>pointsForGroup()</b> dà una mappa che associa il nome di un gruppo al numero di punti per gruppo, con i nomi dei gruppi ordinati alfabeticamente. Il numero di punti di un gruppo è dato dalla somma dei 
+punteggi dei membri del gruppo.
+
+<p>
+Il metodo <b>getAuthorNamesPerPoints</b> dà una mappa che associa ad un punteggio la lista dei nomi degli autori che hanno tale punteggio, con i punteggi ordinati in modo decrescente e i nomi deli autori ordinati alfabeticamente. Sono scartati gli autori con punteggio 0.
+
+</body>
+</html>

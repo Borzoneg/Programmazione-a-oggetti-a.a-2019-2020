@@ -1,0 +1,124 @@
+package it.polito.oop.futsal;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * Represents a infrastructure with a set of playgrounds, it allows teams
+ * to book, use, and  leave fields.
+ *
+ */
+public class Fields {
+    
+    private List<Features> fields = new ArrayList<>();
+    private String closingTime;
+    private String openingTime;
+    private List<Associate> associates = new ArrayList<>();
+    
+    public static class Features {
+        public final boolean indoor; // otherwise outdoor
+        public final boolean heating;
+        public final boolean ac;
+        public Features(boolean i, boolean h, boolean a) {
+            this.indoor=i; this.heating=h; this.ac = a;
+        }
+    }
+    
+    public void defineFields(Features... features) throws FutsalException {
+        for(Features f : features) {
+            if((f.ac || f.heating) && !f.indoor)
+        	throw new FutsalException();
+            fields.add(f);
+        }
+    }
+    
+    public long countFields() {
+        return fields.size();
+    }
+
+    public long countIndoor() {
+        long result = (long)0;
+        for(Features f : fields) {
+            if(f.indoor)
+        	result++;
+        }
+        return result;
+    }
+    
+    public String getOpeningTime() {
+        return openingTime;
+    }
+    
+    public void setOpeningTime(String time) {
+	openingTime = time;
+    }
+    
+    public String getClosingTime() {
+        return closingTime;
+    }
+    
+    public void setClosingTime(String time) {
+	closingTime = time;
+    }
+
+    public int newAssociate(String first, String last, String mobile) {
+        Associate a = new Associate(first, last, mobile);
+        associates.add(a);
+        return associates.size();
+    }
+    
+    public String getFirst(int associate) throws FutsalException {
+	if(associate < 0 || associate >= associates.size())
+	    throw new FutsalException();
+        return associates.get(associate-1).getName();
+    }
+    
+    public String getLast(int associate) throws FutsalException {
+	if(associate < 0 || associate >= associates.size())
+	    throw new FutsalException();
+        return associates.get(associate-1).getSurname();
+    }
+    
+    public String getPhone(int associate) throws FutsalException {
+	if(associate < 0 || associate >= associates.size())
+	    throw new FutsalException();
+        return associates.get(associate-1).getPhone();
+    }
+    
+    public int countAssociates() {
+        return associates.size();
+    }
+    
+    public void bookField(int field, int associate, String time) throws FutsalException {
+
+    }
+
+    public boolean isBooked(int field, String time) {
+        return false;
+    }
+    
+
+    public int getOccupation(int field) {
+        return -1;
+    }
+    
+    
+    public List<FieldOption> findOptions(String time, Features required){
+        return null;
+    }
+    
+    public long countServedAssociates() {
+        return -1;
+    }
+    
+    public Map<Integer,Long> fieldTurnover() {
+        return null;
+    }
+    
+    public double occupation() {
+        return -1.0;
+    }
+    
+}

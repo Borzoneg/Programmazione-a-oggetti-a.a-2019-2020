@@ -1,0 +1,136 @@
+package it.polito.oop.futsal;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * Represents a infrastructure with a set of playgrounds, it allows teams
+ * to book, use, and  leave fields.
+ *
+ */
+public class Fields {
+
+    private List<Field> fields = new ArrayList<>();
+    private String closingTime;
+    private String openingTime;
+    private List<Associate> associates = new ArrayList<>();
+    private List<Boolean> bookings = new ArrayList<>();
+
+    public static class Features {
+	public final boolean indoor; // otherwise outdoor
+	public final boolean heating;
+	public final boolean ac;
+	public Features(boolean i, boolean h, boolean a) {
+	    this.indoor=i; this.heating=h; this.ac = a;
+	}
+    }
+
+    public void defineFields(Features... features) throws FutsalException {
+	for(Features f : features) {
+	    if((f.ac || f.heating) && !f.indoor)
+		throw new FutsalException();
+	    Field field = new Field(f.heating, f.ac, f.indoor);
+	    fields.add(field);
+	}
+    }
+
+    public long countFields() {
+	return fields.size();
+    }
+
+    public long countIndoor() {
+	long result = (long)0;
+	for(Field f : fields) {
+	    if(f.isIndoor())
+		result++;
+	}
+	return result;
+    }
+
+    public String getOpeningTime() {
+	return openingTime;
+    }
+
+    public void setOpeningTime(String time) {
+	openingTime = time;
+    }
+
+    public String getClosingTime() {
+	return closingTime;
+    }
+
+    public void setClosingTime(String time) {
+	closingTime = time;
+    }
+
+    public int newAssociate(String first, String last, String mobile) {
+	Associate a = new Associate(first, last, mobile);
+	associates.add(a);
+	return associates.size();
+    }
+
+    public String getFirst(int associate) throws FutsalException {
+	if(associate < 0 || associate > associates.size())
+	    throw new FutsalException();
+	return associates.get(associate-1).getName();
+    }
+
+    public String getLast(int associate) throws FutsalException {
+	if(associate < 0 || associate > associates.size())
+	    throw new FutsalException();
+	return associates.get(associate-1).getSurname();
+    }
+
+    public String getPhone(int associate) throws FutsalException {
+	if(associate < 0 || associate > associates.size())
+	    throw new FutsalException();
+	return associates.get(associate-1).getPhone();
+    }
+
+    public int countAssociates() {
+	return associates.size();
+    }
+
+    public void bookField(int field, int associate, String time) throws FutsalException {
+	if(field < 0 || field > fields.size())
+	    throw new FutsalException();
+	if(associate < 0 || associate > associates.size())
+	    throw new FutsalException();
+	if((Integer.valueOf(time.split(":")[0]) < Integer.valueOf(openingTime.split(":")[0])) || // caso: opening time = 12:30 time = 11:XX
+		(Integer.valueOf(time.split(":")[0]) == Integer.valueOf(openingTime.split(":")[0]) && Integer.valueOf(time.split(":")[1]) < Integer.valueOf(openingTime.split(":")[1])) || // caso: opening time = 12:30 time = 12:20
+		(Integer.valueOf(time.split(":")[0]) >= Integer.valueOf(closingTime.split(":")[0])) || // caso: closing time = 17:00 time = 17:xx; closing time = 17:00 time = 18:xx 
+		(Integer.valueOf(time.split(":")[1]) != Integer.valueOf(closingTime.split(":")[1])) ||  // caso: closing time = 17:00 time = 12:30
+		(Integer.valueOf(time.split(":")[1]) != Integer.valueOf(openingTime.split(":")[1]))) // caso minuti apertura e
+	    throw new FutsalException();
+	fields.get(field-1).book(time, associates.get(associate-1));
+    }
+
+    public boolean isBooked(int field, String time) {
+	return fields.get(field-1).isBooked(time);
+    }
+
+
+    public int getOccupation(int field) {
+	return fields.get(field-1).getOccupation();
+    }
+
+
+    public List<FieldOption> findOptions(String time, Features required){
+	return null;
+    }
+
+    public long countServedAssociates() {
+	return -1;
+    }
+
+    public Map<Integer,Long> fieldTurnover() {
+	return null;
+    }
+
+    public double occupation() {
+	return -1.0;
+    }
+
+}
